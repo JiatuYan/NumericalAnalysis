@@ -1,0 +1,87 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{NAME JiaTu Yan}
+\chead{Numerical Analysis homework \#0}
+\rhead{Date 2020.3.7}
+
+
+\section*{I. Exercise 0.10 \small{Rewrite each of the following statements into logical statements}}
+
+\subsection*{I-a \small{The only even prime is 2}}
+Let $\mathbb{P} \subseteq \mathbb{N}^+$ denote the set of prime numbers. 
+$\exists! x = 2 \in \mathbb{P}, s.t. \frac{x}{2} \in \mathbb{Z}.$ 
+
+\subsection*{I-b \small{Multiplication of integers is associative.}}
+$\forall x,y,z \in \mathbb{Z}$, $x(yz)=(xy)z$
+
+\subsection*{I-c \small{Goldbath's conjecture has at most a finite numberof counterexamples.}}
+Let $\mathbb{P}$ denote the set of counterexamples of Goldbath's conjecture.
+$\forall$ a sequence $\{ x_{n} \}$, $x_{n} \in \mathbb{P}$, $n \in \mathbb{N}^+$.
+$\exists \mathbb{N}$ s.t. $\forall n \geq \mathbb{N}$, $\exists m < \mathbb{N}$ s.t. $x_{n} = x_{m}$.  
+
+\section*{II. \small{Prove: On $(a, \infty)$, $f(x)=\frac{1}{x^2}$ is uniformly continuous if $a>0$ and is not so if $a=0$  } }
+Proof:
+
+\subsection*{\small{$\textcircled{1}$ $a>0$}}
+$\forall \epsilon > 0$, $\exists \delta = \frac{a^{2}\epsilon}{2}$, s.t. $\forall x, y \in (a, \infty)$, $\mid x - y \mid < \delta$, we can suppose that $x > y$.
+$\mid\frac{1}{x^2} - \frac{1}{y^2}\mid \leq \mid\frac{2x\delta}{y^4}\mid \leq \frac{2\delta}{a^4} < \epsilon$.
+Thus, $\frac{1}{x^2}$ is uniformly continuous.
+
+\subsection*{\small{$\textcircled{2}$ $a=0$}}
+$\forall \delta > 0$, $\exists x=\frac{\delta}{2} y=\delta$, $\exists \epsilon = \frac{2}{\delta^2}$.
+Thus, $\mid x - y \mid < \delta$, $\mid \frac{1}{x^2} - \frac{1}{y^2} \mid = \frac{3}{\delta^2} > \epsilon$
+So, when $a = 0$, $\frac{1}{x^2}$ is not uniformly continous.
+
+\section*{III. \small{Prove: $d(x,y) = \sum_{j=1}^{n}\frac{1}{2^j}\frac{\mid\xi_{j} - \eta_{j}\mid}{1 + \mid\xi_{j} - \eta_{j}\mid} is a metrix on \mathcal{X}$}}
+Proof:
+
+\subsection*{\small{$\textcircle{1}$ non-negativity}}
+Since $\mid\xi_{j} - \eta_{j}\mid \egq 0$, $\forall x,y \in \mathcal{X}$, $d(x,y) \geq 0$.
+
+\subsection*{\small{$\textcircle{2}$ identity of indiscernibles}} 
+Since $\mid\xi_{j} - \eta_{j}\mid \egq 0$, and iff $\xi_{j} = \eta{j}$, the equality is reached. Each item of the sequence $d(x,y)$ is bigger than 0.
+We have $d(x,y) = 0 \iff \forall j \in \mathbb{N}^+, \xi_{j} = \eta_{j}$, thus $d(x,y) \iff x = y$. 
+
+\subsection*{\small{$\textcircle{3}$ symmetry}}
+Since $\mid\xi_{j} - \eta_{j}\mid = \mid\eta_{j} - \xi_{j}\mid$, $d(x,y) = d(y,x)$ is obvious.
+
+\subsection*{\small{$\textcircle{4}$ triangle inequality}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
