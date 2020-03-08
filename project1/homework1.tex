@@ -55,8 +55,8 @@ $\exists \mathbb{N}$ s.t. $\forall n \geq \mathbb{N}$, $\exists m < \mathbb{N}$ 
 Proof:
 
 \subsection*{\small{$\textcircled{1}$ $a>0$}}
-$\forall \epsilon > 0$, $\exists \delta = \frac{a^{2}\epsilon}{2}$, s.t. $\forall x, y \in (a, \infty)$, $\mid x - y \mid < \delta$, we can suppose that $x > y$.
-$\mid\frac{1}{x^2} - \frac{1}{y^2}\mid \leq \mid\frac{2x\delta}{y^4}\mid \leq \frac{2\delta}{a^4} < \epsilon$.
+$\forall \epsilon > 0$, $\exists \delta = \frac{a^{3}\epsilon}{2}$, s.t. $\forall x, y \in (a, \infty)$, $\mid x - y \mid < \delta$, we can suppose that $x > y$.
+$\mid\frac{1}{x^2} - \frac{1}{y^2}\mid \leq \mid\frac{2x\delta}{y^4}\mid \leq \frac{2\delta}{a^3} < \epsilon$.
 Thus, $\frac{1}{x^2}$ is uniformly continuous.
 
 \subsection*{\small{$\textcircled{2}$ $a=0$}}
@@ -64,21 +64,65 @@ $\forall \delta > 0$, $\exists x=\frac{\delta}{2} y=\delta$, $\exists \epsilon =
 Thus, $\mid x - y \mid < \delta$, $\mid \frac{1}{x^2} - \frac{1}{y^2} \mid = \frac{3}{\delta^2} > \epsilon$
 So, when $a = 0$, $\frac{1}{x^2}$ is not uniformly continous.
 
-\section*{III. \small{Prove: $d(x,y) = \sum_{j=1}^{n}\frac{1}{2^j}\frac{\mid\xi_{j} - \eta_{j}\mid}{1 + \mid\xi_{j} - \eta_{j}\mid} is a metrix on \mathcal{X}$}}
+\section*{III. \small{Prove: $d(x,y) = \sum_{j=1}^{n}\frac{1}{2^j}\frac{\mid\xi_{j} - \eta_{j}\mid}{1 + \mid\xi_{j} - \eta_{j}\mid}$ is a metrix on $\mathcal{X}$}}
 Proof:
 
-\subsection*{\small{$\textcircle{1}$ non-negativity}}
-Since $\mid\xi_{j} - \eta_{j}\mid \egq 0$, $\forall x,y \in \mathcal{X}$, $d(x,y) \geq 0$.
+\subsection*{\small{$\textcircled{1}$ non-negativity}}
+Since $\mid\xi_{j} - \eta_{j}\mid \geq 0$, $\forall x,y \in \mathcal{X}$, $d(x,y) \geq 0$.
 
-\subsection*{\small{$\textcircle{2}$ identity of indiscernibles}} 
-Since $\mid\xi_{j} - \eta_{j}\mid \egq 0$, and iff $\xi_{j} = \eta{j}$, the equality is reached. Each item of the sequence $d(x,y)$ is bigger than 0.
+\subsection*{\small{$\textcircled{2}$ identity of indiscernibles}} 
+Since $\mid\xi_{j} - \eta_{j}\mid \geq 0$, and iff $\xi_{j} = \eta_{j}$, the equality is reached. Each item of the sequence $d(x,y)$ is bigger than 0.
 We have $d(x,y) = 0 \iff \forall j \in \mathbb{N}^+, \xi_{j} = \eta_{j}$, thus $d(x,y) \iff x = y$. 
 
-\subsection*{\small{$\textcircle{3}$ symmetry}}
+\subsection*{\small{$\textcircled{3}$ symmetry}}
 Since $\mid\xi_{j} - \eta_{j}\mid = \mid\eta_{j} - \xi_{j}\mid$, $d(x,y) = d(y,x)$ is obvious.
 
-\subsection*{\small{$\textcircle{4}$ triangle inequality}}
+\subsection*{\small{$\textcircled{4}$ triangle inequality}}
+$\forall x,y,z \in \mathbb{X}$, $x = (\xi_{j})$, $y = (\eta_{j})$, $z = (\delta_{j})$. 
 
+Suppose $a_{j} = \mid\xi_{j} - \eta_{j}\mid$, $b_{j} = \mid\xi_{j}- \delta_{j}\mid$, $c = \mid\eta_{j} - \delta_{j}\mid$.
+
+Since $\forall j \in \mathbb{N}^+ a_{j}, b_{j}, c_{j} all > 0$. We can $\forall j$ and fix it. In the following proof, i will omit j.
+
+Because $a \leq b + c$, we have $a + ba + ca + abc \leq b + c + 2bc + ab + ac + 2abc$, sort it we will have $(1 + a)[b(1 + c) + c(1 + b)] \geq a(1 + b)(1 + c)$.
+
+Since $a + 1 \geq 0$, we will have $0 = \frac{a}{1 + a} \leq \frac{b}{1 + b} + \frac{c}{1 + c}$. Obviously, we can have $d(x,y) \leq d(x,z) + d(y,z)$.
+
+\section*{IV. \small{Prove: $d(x,y) = (\sum_{i=1}^{\infty}{\mid\xi_{i} - \eta_{i}\mid}^{p})^{\frac{1}{p}}$ is a metrix}}
+
+Proof:
+
+The non-negativity, identity of indiscernibles and symmetry is obviously proved by $\mid\xi_{i} - \eta{i}\mid \geq 0$.
+
+Now prove trangle inequality.
+
+Firstly, we prove the Holder inequality.
+
+p,q are conjugate exponents.Since we have $\forall \alpha,\beta \in \mathbb(R)^+$, $\alpha\beta \leq \frac{\alpha^p}{p} + \frac{\beta^q}{q}$.
+
+Suppose $A_{i} = \frac{\mid\xi_{i}\mid}{(\sum_{i=1}^{\infty}{{\mid\xi_{i}\mid}^p})^{\frac{1}{p}}}$, $B_{i} = \frac{\mid\eta_{i}\mid}{(\sum_{i=1}^{\infty}{{\mid\eta_{i}\mid}^q)}^{\frac{1}{q}}}$. 
+
+So we have $A_{i}B_{i} \leq \frac{{A_{i}}^p}{p} + \frac{{B_{i}}^q}{q}$. Now sum up the inequality by i, We have 
+
+$\frac{\sum_{i=1}^{\infty}\mid\xi_{i}\eta_{i}\mid}{({(\sum_{i=1}^{\infty}{{\mid\xi_{i}\mid}^{p}})}^{\frac{1}{p}})({({sum_{i=1}^{\infty}{\mid\eta_{i}\mid}^q})}^{\frac{1}{q}})} \leq \frac{1}{p} + \frac{1}{q} = 1$.
+
+Then we use Holder inequality to prove Minkowski inequality.
+
+$A = (\sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p})^{\frac{1}{p}} \leq \sum_{i=1}^{\infty}({\mid\xi_{i}\mid})(\sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p-1}) + (\sum_{i=1}^{\infty}\mid\eta_{i}\mid)(sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p-1})$
+
+By Holder Equation, we have 
+
+$A \leq (\sum_{i=1}^{\infty}{\mid\xi_{i}\mid}^{p})^{\frac{1}{p}}[\sum_{i=1}^{\infty}{\mid\xi_{i}\eta_{i}\mid}^{pq-q}]^{\frac{1}{q}} + (\sum_{i=1}^{\infty}{\mid\eta_{i}\mid}^{p})^{\frac{1}{p}}[\sum_{i=1}^{\infty}{\mid\xi_{i}\eta_{i}\mid}^{pq-q}]^{\frac{1}{q}}$
+
+Sort the inequality we have 
+
+$(\sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p})^{\frac{1}{p}} \leq (\sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p})^{\frac{1}{p}(p - \frac{p}{q})} \leq (\sum_{i=1}^{\infty}{\mid\xi_{i}\mid}^{p})^{\frac{1}{p}}+(\sum_{i=1}^{\infty}{\mid\eta_{i}\mid}^{p})^{\frac{1}{p}}$
+
+Then $\forall x,y,z \in \mathbb{X}, x=\{x_{i}\}, y=\{y_{i}\}, z=\{z_{i}\}$.
+
+Replace $\xi{i}$ by $x_{i} - z_{i}$, $\eta_{i}$ by $y_{i} - z{i}$, thus $d(x,y) \leq d(x,z) + d(y,z)$.
+
+So that we proved that it is a metrix.
 \end{document}
 
 %%% Local Variables: 
