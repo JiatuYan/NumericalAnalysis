@@ -1,0 +1,338 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{NAME JiaTu Yan}
+\chead{Numerical Analysis homework \#0}
+\rhead{Date 2020.3.7}
+
+
+\section*{I. Exercise 0.10 \small{each of the following statements into logical statements}}
+
+\subsection*{I-a \small{The only even prime is 2}}
+
+Let $\mathbb{P} \subseteq \mathbb{N}^+$ denote the set of prime numbers. 
+$\exists! x = 2 \in \mathbb{P}, s.t. \frac{x}{2} \in \mathbb{Z}.$ 
+
+\subsection*{I-b \small{Multiplication of integers is associative.}}
+$\forall x,y,z \in \mathbb{Z}, x(yz)=(xy)z$
+
+\subsection*{I-c \small{Goldbath's conjecture has at most a finite numberof counterexamples.}}
+
+Let $\mathbb{P}$ denote the set of counterexamples of Goldbath's conjecture.
+$\forall$ a sequence $\{ x_{n} \}, x_{n} \in \mathbb{P}, n \in \mathbb{N}^+$.
+$\exists \mathbb{N} s.t. \forall n \geq \mathbb{N}, 
+\exists m < \mathbb{N} s.t. x_{n} = x_{m}$.  
+
+\section*{II. \small{Prove: On $(a, \infty)$, $f(x)=\frac{1}{x^2}$ is uniformly continuous if $a>0$ and is not so if $a=0$  } }
+Proof:
+
+$\forall \epsilon > 0, \exists \delta = \frac{a^{3}\epsilon}{2},
+s.t. \forall x, y \in (a, \infty), \mid x - y \mid < \delta$
+we can suppose that $x > y$.
+Then, we have $\mid\frac{1}{x^2} - \frac{1}{y^2}\mid \leq \mid\frac{2x\delta}
+{y^4}\mid \leq \frac{2\delta}{a^3} < \epsilon$.
+Thus, $\frac{1}{x^2}$ is uniformly continuous.
+
+\subsection*{\small{$\textcircled{2}$ $a=0$}}
+
+$\forall \delta > 0$, $\exists x=\frac{\delta}{2} y=\delta$, $\exists \epsilon = \frac{2}{\delta^2}$.
+Thus, $\mid x - y \mid < \delta$, $\mid \frac{1}{x^2} - \frac{1}{y^2} \mid = \frac{3}{\delta^2} > \epsilon$
+So, when $a = 0$, $\frac{1}{x^2}$ is not uniformly continous.
+
+\section*{III. \small{Prove: $d(x,y) = \sum_{j=1}^{n}\frac{1}{2^j}\frac{\mid\xi_{j} - \eta_{j}\mid}{1 + \mid\xi_{j} - \eta_{j}\mid}$ is a metrix on $\mathcal{X}$}}
+Proof:
+
+\subsection*{\small{$\textcircled{1}$ non-negativity}}
+
+Since $\mid\xi_{j} - \eta_{j}\mid \geq 0$, $\forall x,y \in \mathcal{X}$, $d(x,y) \geq 0$.
+
+\subsection*{\small{$\textcircled{2}$ identity of indiscernibles}} 
+
+Since $\mid\xi_{j} - \eta_{j}\mid \geq 0$, and iff $\xi_{j} = \eta_{j}$, the equality is reached. Each item of the sequence $d(x,y)$ is bigger than 0.
+We have $d(x,y) = 0 \iff \forall j \in \mathbb{N}^+, \xi_{j} = \eta_{j}$, thus $d(x,y) \iff x = y$. 
+
+\subsection*{\small{$\textcircled{3}$ symmetry}}
+
+Since $\mid\xi_{j} - \eta_{j}\mid = \mid\eta_{j} - \xi_{j}\mid$, $d(x,y) = d(y,x)$ is obvious.
+
+\subsection*{\small{$\textcircled{4}$ triangle inequality}}
+
+$\forall x,y,z \in \mathbb{X}$, $x = (\xi_{j})$, $y = (\eta_{j})$, $z = (\delta_{j})$.
+Suppose $a_{j} = \mid\xi_{j} - \eta_{j}\mid$, $b_{j} = \mid\xi_{j}- \delta_{j}\mid$, $c = \mid\eta_{j} - \delta_{j}\mid$.
+Since $\forall j \in \mathbb{N}^+ a_{j}, b_{j}, c_{j} > 0$. $\forall j$ and fix it. In the following proof, I will omit j.
+Because $a \leq b + c$, we have $a + ba + ca + abc \leq b + c + 2bc + ab + ac + 2abc$, sort it we will have $(1 + a)[b(1 + c) + c(1 + b)] \geq a(1 + b)(1 + c)$.
+Since $a + 1 \geq 0$, we will have $0 = \frac{a}{1 + a} \leq \frac{b}{1 + b} + \frac{c}{1 + c}$. Obviously, we can have $d(x,y) \leq d(x,z) + d(y,z)$.
+
+\section*{IV. \small{Prove: $d(x,y) = (\sum_{i=1}^{\infty}{\mid\xi_{i} - \eta_{i}\mid}^{p})^{\frac{1}{p}}$ is a metrix}}
+
+Proof:
+
+The non-negativity, identity of indiscernibles and symmetry is obviously proved by $\mid\xi_{i} - \eta{i}\mid \geq 0$.
+Now prove trangle inequality.
+Firstly, we prove the Holder inequality.
+p,q are conjugate exponents.Since we have $\forall \alpha,\beta \in \mathbb{R}^+$, $\alpha\beta \leq \frac{\alpha^p}{p} + \frac{\beta^q}{q}$.
+Suppose $A_{i} = \frac{\mid\xi_{i}\mid}{(\sum_{i=1}^{\infty}{{\mid\xi_{i}\mid}^p})^{\frac{1}{p}}}$, $B_{i} = \frac{\mid\eta_{i}\mid}{(\sum_{i=1}^{\infty}{{\mid\eta_{i}\mid}^q)}^{\frac{1}{q}}}$. 
+So we have $A_{i}B_{i} \leq \frac{{A_{i}}^p}{p} + \frac{{B_{i}}^q}{q}$. Now sum up the inequality by i, We have 
+$$\frac{\sum_{i=1}^{\infty}\mid\xi_{i}\eta_{i}\mid}{({(\sum_{i=1}^{\infty}{{\mid\xi_{i}\mid}^{p}})}^{\frac{1}{p}})
+({({\sum_{i=1}^{\infty}{\mid\eta_{i}\mid}^q})}^{\frac{1}{q}})} \leq \frac{1}{p} + \frac{1}{q} = 1$$.
+Then we use Holder inequality to prove Minkowski inequality.
+$$A = (\sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p})^{\frac{1}{p}} 
+\leq (\sum_{i=1}^{\infty}\mid \xi_{i}+\eta_{i}\mid\mid\xi_{i}+\eta_{i}\mid^{p-1})^{\frac{1}{p}}$$
+By Holder inequality we have
+$$A \leq (\sum_{i=1}^{\infty}\mid\xi_{i}+\eta_{i}\mid^{p})^{\frac{1}{p}}
+(\sum_{i=1}^{\infty}\mid\xi_{i}+\eta_{i}\mid^{pq-q})^{\frac{1}{q}}
+\leq(\sum_{i=1}^{\infty}{\mid\xi_{i}\mid}^{p})^{\frac{1}{p}}[\sum_{i=1}^{\infty}{\mid\xi_{i}+\eta_{i}\mid}^{pq-q}]^{\frac{1}{q}} +
+(\sum_{i=1}^{\infty}{\mid\eta_{i}\mid}^{p})^{\frac{1}{p}}
+[\sum_{i=1}^{\infty}{\mid\xi_{i}+\eta_{i}\mid}^{pq-q}]^{\frac{1}{q}}$$
+Sort the inequality we have 
+$$(\sum_{i=1}^{\infty}{\mid\xi_{i} + \eta_{i}\mid}^{p})^{\frac{1}{p}} = (\sum_{i=1}^{\infty}{\mid\xi_{i} + 
+\eta_{i}\mid}^{p})^{\frac{1}{p}(p - \frac{p}{q})} \leq (\sum_{i=1}^{\infty}{\mid\xi_{i}\mid}^{p})^{\frac{1}{p}}+
+(\sum_{i=1}^{\infty}{\mid\eta_{i}\mid}^{p})^{\frac{1}{p}}$$
+Then $\forall x,y,z \in \mathbb{X}, x=\{x_{i}\}, y=\{y_{i}\}, z=\{z_{i}\}$.
+Replace $\xi{i}$ by $x_{i} - z_{i}$, $\eta_{i}$ by $y_{i} - z{i}$, thus $d(x,y) \leq d(x,z) + d(y,z)$.
+So that we proved that it is a metrix.
+
+\section*{V. \small{Deduce additivity and conjugate homogeneity in the second slot}}
+
+\subsection*{\small{$\textcircled{1}$ Aditivity}}
+
+$$\forall u,v,w \in \mathcal{V}, \langle u,v+w\rangle=
+\overline{\langle v+w,u\rangle}=
+\overline{\langle v,u\rangle}+\overline{\langle w,u\rangle}=
+\langle u,v\rangle+\langle u,w\rangle $$
+
+\subsection*{\small{$\textcircled{2}$ Aditivity}}
+
+$$\forall u,v\in \mathcal{V},\forall a \in \mathbb{F}, 
+\langle u,av\rangle=
+\overline{\langle av,u\rangle}=
+\overline{a}\overline{\langle v,u\rangle}=
+\overline{a}\langle u,v\rangle$$
+
+
+\section*{VI. \small{In the case of Euclidean $\ell_{p}$norms
+, show that the parallelogram law (0.72) holds if and only if $p=2$.}}
+In the whole question, we discuss in the field $\mathbb{F}^{n}$, 
+$1\leq n<\infty$
+
+\subsection*{\small{$\textcircled{1}$$n=1$}}
+
+$\forall u,v\in \mathbb{F},
+\forall p\geq1,
+2{\mid\mid u\mid\mid}^2+
+2{\mid\mid v\mid\mid}^{2}=
+2{({\mid u\mid}^p)}^{\frac{2}{p}}+
+2{({\mid v\mid}^p)}^{\frac{2}{p}}=
+2u^2+2v^2=(u-v)^2+(u+v)^2=
+{({\mid u-v\mid}^p)}^{\frac{2}{p}}+
+{({\mid u+v\mid}^p)}^{\frac{2}{p}}+
+{\mid\mid u-v\mid\mid}^2+
+{\mid\mid v+u\mid\mid}^{2}$
+
+\subsection*{\small{$\textcircled{2}$$n>1,p\neq2$}}
+We take $u=(u_{i}),v=(v_{i}),u_{1}=1,u_{2}=-1, v_{1}=1,v_{2}=1$,
+if $i\neq1,2, u_{i}=v_{i}=0$(if $u_{i},v_{i}$ exists.)
+Then, if $p=\infty$,
+$$2{\mid\mid u\mid\mid}^{2}+2{\mid\mid v\mid\mid}^2=
+2+2=4,{\mid\mid u+v\mid\mid}^2+{\mid\mid u+v\mid\mid}^2=
+2^2+2^2=8\neq{\mid\mid u\mid\mid}^{2}+{\mid\mid v\mid\mid}^{2}$$
+if $p<\infty$,
+$$2{\mid\mid u\mid\mid}^{2}+2{\mid\mid v\mid\mid}^2=
+2(2)^{\frac{2}{p}}+2(2)^{\frac{2}{p}}=
+4(2)^{\frac{2}{p}},
+{\mid\mid u+v\mid\mid}^{2}+{\mid\mid u-v\mid\mid}^{2}=
+(2)^2+(2)^2=8\neq{\mid\mid u\mid\mid}^{2}+{\mid\mid v\mid\mid}^{2}$$
+\subsection*{\small{$\textcircled{3}$$n>1,p=2$}}
+We take $u=\{u_{i}\},v=\{v_{i}\}$
+\begin{equation*}
+	\begin{split}
+2{\mid\mid u\mid\mid}^{2}+2{\mid\mid v\mid\mid}^2=
+2{(\sum_{i=1}^{n}{(\mid u_{i}\mid)}^{2})}^{\frac{2}{2}}
++2{(\sum_{i=1}^{n}{(\mid u_{i}\mid)}^{2})}^{\frac{2}{2}}=
+\sum_{i=1}^{n}(u_{i}^{2}+v_{i}^{2}+2u_{i}v_{i})
++\sum_{i=1}^{n}(u_{i}^{2}+v_{i}^{2}-2u_{i}v_{i})\\=
+(\sum_{i=1}^{n}(u_{i}+v_{i})^{2})^{\frac{2}{2}}
++(\sum_{i=1}^{n}(u_{i}-v_{i})^{2})^{\frac{2}{2}}=
+{\mid\mid u+v\mid\mid}^{2}+{\mid\mid u-v\mid\mid}^{2}
+\end{split}
+\end{equation*}
+\section*{VII. \small{Prove Theorem 0.102}}
+\subsection*{\small{$\textcircled{1}$ induced norm $\mid\mid.\mid\mid$ holds for some inner product$\langle,\rangle$}}
+	
+$\forall u,v\in \mathbb{F}^n$.We have
+$$\mid\mid u-v\mid\mid^{2}=\langle u-v,u-v\rangle=
+\langle u,u\rangle+\langle v,v\rangle
+-\langle v,u\rangle-\langle u,v\rangle$$
+$$\mid\mid u+v\mid\mid^{2}=\langle u+v,u+v\rangle=
+\langle u,u\rangle+\langle v,v\rangle
++\langle v,u\rangle+\langle u,v\rangle$$
+sum the two equation up, we have
+$$2\mid\mid u\mid\mid^{2}+2\mid\mid v\mid\mid^{2}=
+\mid\mid u-v\mid\mid^2+\mid\mid v+u\mid\mid^2$$
+
+\subsection*{\small{$\textcircled{2}$ The parallelogram law holds for every pair of u,v $\in \mathcal{V}$}}
+
+We can define a $\langle,\rangle$by
+$$\forall u,v\in\mathcal{V},|u,v|=\frac{1}{2}(\mid\mid u+v\mid\mid
+-\mid\mid u\mid\mid-\mid\mid v\mid\mid)$$
+Then we prove that the $\langle,\rangle$ is an inner product. Real positivity:
+$$\forall v\in\mathcal{V},\langle v,v\rangle=\frac{1}{2}(\mid\mid 2v\mid\mid
+-\mid\mid v\mid\mid-\mid\mid v\mid\mid)=
+\mid\mid v\mid\mid\geq 0$$
+Definiteness:
+\begin{equation*}
+\langle v,v\rangle =0\Rightarrow 
+\mid\mid v\mid\mid^2=\langle v,v\rangle=0	
+\Rightarrow v = 0
+\end{equation*}
+\begin{equation*}
+v=0\Rightarrow\langle v,v\rangle=\mid\mid v\mid\mid^2=0$$
+\end{equation*}
+Additivity in the first slot:
+\begin{equation*}
+	\begin{split}
+	\forall u,v,w\in\mathcal{V},
+	\langle v+u,w\rangle=\frac{1}{2}(\mid\mid u+v+2\frac{1}{2}w\mid\mid^2
+	-\mid\mid u+v\mid\mid^2-\mid\mid w\mid\mid^2)\\=
+	\frac{1}{2}(2\mid\mid u+\frac{1}{2}w\mid\mid^2+
+	2\mid\mid v+\frac{1}{2}w\mid\mid^2-
+	\mid\mid u-v\mid\mid-\mid\mid u+v\mid\mid-\mid\mid w\mid\mid)\\=
+	\frac{1}{2}(2\mid\mid u+\frac{1}{2}w\mid\mid^2+2\mid\mid w\mid\mid^2
+	+\mid\mid v+\frac{1}{2}w\mid\mid^2+2\mid\mid w\mid\mid-
+	\mid\mid u+v\mid\mid^2-\mid\mid u-v\mid\mid^2-
+	2\mid\mid w\mid\mid^2)\\=
+	\frac{1}{2}(\mid\mid u+w\mid\mid^2+\mid\mid u\mid\mid^2
+	-2\mid\mid u\mid\mid^2-2\mid\mid v\mid\mid^2
+	-2\mid\mid w\mid\mid^2)\\=
+	\frac{1}{2}(\mid\mid u+w\mid\mid^2-\mid\mid u\mid\mid^2-\mid\mid w\mid\mid^2)
+	+\frac{1}{2}(\mid\mid v+w\mid\mid^2-\mid\mid v\mid\mid^2-\mid\mid w\mid\mid^2)=
+	\langle u,w\rangle+\langle v,w\rangle
+	\end{split}
+\end{euqation*}
+Conjugate symmetry:
+\begin{equation*}
+	\forall u,v\in\mathcal{V},\langle u,v\rangle=
+	\frac{1}{2}(\mid\mid u+v\mid\mid^2+\mid\mid u\mid\mid^2+\mid\mid v\mid\mid^2)=
+	\langle v,u\rangle=\overline{\langle v,u\rangle}
+\end{equation*}
+Homogeneity in the first slot:
+$$\forall u,v\in\mathcal{V}$$
+Firstly, we prove the situation when $a=-1$ 
+\begin{equation*}
+	\langle -u,v\rangle
+	=\langle 0,v\rangle-\langle u,v\rangle
+	=-\langle u,v\rangle.
+\end{equation*}
+Thus, we can let a>0,for the situation when $a<0$, we replace
+u by -u, then it turns into situation when $a>0$.
+Then we prove $a\in\mathbb{Z}$.
+\begin{equation*}
+	\forall a>0\in\mathbb{Z},\langle au,v\rangle
+	=\sum{i=1}{a}\langle u,v\rangle
+	=a\langle u,v\rangle
+\end{euqation*} 
+Then when $a\in\mathbb{Q}$.
+\begin{equation*}
+	\forall a=\frac{p}{q}\in\mathbb{Q},p,q\in\mathbb{Z},
+	\frac{p}{q}\langle u,v\rangle
+	=\frac{1}{q}\langle \frac{pq}{q}u,v\rangle
+	=\frac{1}{q}q\langle \frac{p}{q}u,v\rangle
+	=\langle \frac{p}{q}u,v\rangle
+\end{equation*}
+Due to the continuity of $\langle u,v\rangle$. We can span a to irrational numbers.
+	\begin{gather*}
+	\forall a\in\mathbb{R},\forall \epsilon>0,
+	\exists \delta, \forall p\in\mathbb{Q},\mid p-a\mid<delta,\\
+	\mid a\langle u,v\rangle-p\langle u,v\rangle\mid<\epsilon,
+	\mid \langle au,v\rangle-\langle pu,v\rangle\mid<\epsilon\\
+	\because p\langle u,v\rangle=\langle pu,v\rangle\\
+	\therefore a\langle u,v\rangle=\langle au,v\rangle
+	\end{gather*}
+Therefore, we have a inner product$\langle,\rangle:\mathcal{V}\rightarrow
+\mathbb{R}.$
+
+\section*{VIII. \small{Tell a story about determinants from the viewpoint of problem-driven abstraction.}}
+Inorder to deter whether the N-element linear equations $AX=0$
+has a nonzero solution,
+where $A={aij} \in{\mathbb{R}}^{n\times n},X\in{R}^n$,
+Leibniz introduced the conception of determinant,
+he proved that $determant=(-1)^{\tau t_{1}t_{2}...t_{n}}\Pi 
+a_{1t_{1}}a_{2t_{2}}...a_{nt_{n}}$($\{t_{i}\}$is a 
+arrange of 1 to n).
+If $determinant = 0$, then the N-element linear equations has a nonzero solution .  
+After the apperance of matrix, determinant is symbolized by
+$detA$, which is called the determinant of matrix A.
+Since we can view A as $(v_{1},v_{2},...,v_{n}),v_{i}\in{R}^{n}$,
+its easy to prove that the definition of determinant
+in our material is also meeted.
+
+We can also view $A$ as a linear map which maps 
+$\mathbb{P}^{n}$ to $\mathbb{P}^{n}$.
+Then we can easily turn
+N-element linear equations $AX=0$ to  
+$A$ maps $X$ to $0$,
+which develops the abstract define of determinant 
+to the geometric meaning.
+The determinant of a linearing map $A$
+means the stretch factor of the linear map $A$.
+Its value shows the volume of a unit n-dimensional cuboid
+mapped from the formal coordinate by $A$.
+So we can take $\mid .\mid$ to symbolize $det A$ as a volume of 
+linear map A.
+If $\mid A\mid=0$, it means A can map $\mathbb{R}^{n}$ 
+to $\mathbb{R}^{n-1}$, thus the volume of a n-dimensional cuboid
+becomes zero.
+The sign of $\mid A\mid$ means the direction of map $A$.
+If $\mid A\mid<0$, it maps a left-handed coordinate 
+into a right-handed one, or maps a right-handed coordinate
+into a left-handed one.
+If $\mid A\mid>0$, it does not change such a property of
+the coordinate.
+
+Since $detA \in\mathbb{R}$
+, we can define the linearing orderings
+by the value of determinant.
+
+If we view $detA$ as the stretch factor of a linearing map,
+we can define the linearing orderings of determinant:X is
+a unit n-dimensional cuboid, $\forall A,B\in\mathbb{R}^{n}$,
+if the directed volume of $AX \geq BX$, then $detA \geq detB$.
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
