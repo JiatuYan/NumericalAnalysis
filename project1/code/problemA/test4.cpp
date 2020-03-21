@@ -1,11 +1,11 @@
 #include "function4.h"
-#include "binarymethod.h"
+#include "BinaryMethod.h"
 
 int main(int argc, char *argv[])
 {
 	std::ifstream my_in("input.txt");
 	std::ofstream my_out("output4.txt");
-	function1 f;
+	function4 f;
 	BinaryMethod B;
 	double e,fe;
 	int t;

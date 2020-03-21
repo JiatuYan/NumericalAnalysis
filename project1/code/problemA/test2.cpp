@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
 	std::ifstream my_in("input.txt");
 	std::ofstream my_out("output2.txt");
-	function1 f;
+	function2 f;
 	BinaryMethod B;
 	double e,fe;
 	int t;
