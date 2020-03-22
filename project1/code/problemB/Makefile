@@ -8,4 +8,4 @@ test : $(OBJ)
 	g++ -c $< 
 
 clean :
-	rm *.o *.exe html latex -fr test1 test2 test3 test4
+	rm *.o *.exe html latex -fr test output.txt

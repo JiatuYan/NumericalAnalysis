@@ -1,0 +1,315 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{NAME Jiatu Yan}
+\chead{Numerical Analysis homework \#1}
+\rhead{Date 2020.3.20}
+
+
+\section*{I. \small{Binary Method}}
+I used binary method found the roots of the following 
+four functions, the iterating times and the times of postcondition $\epsilon$
+are nearly in linear relationship. The converging speed is 1, not so fast.
+
+\subsection*{I-a \small{$x^{-1}-\tan x $ on $[0,\frac{\pi}{2}]$}} 
+
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition $\epsilon$ and $\delta$ & $\alpha$ & iterating times\\
+\hline
+$10^{-5}$ & 0.860335521730643  &     17\\
+\hline
+$10^{-6}$ & 0.860333274688473  &     21\\
+\hline
+$10^{-7}$ & 0.860333555568744  &     24\\
+\hline
+$10^{-8}$ & 0.860333590678778  &     27\\
+\hline
+$10^{-9}$ & 0.860333589215860  &     30\\
+\hline
+$10^{-10}$ & 0.860333589032996  &     33\\
+\hline
+$10^{-11}$ & 0.860333589021567  &     37\\
+\hline
+$10^{-12}$ & 0.860333589019424  &     41\\
+\hline
+$10^{-13}$ & 0.860333589019334  &     44\\
+\hline
+$10^{-14}$ & 0.860333589019379  &     45\\
+\hline
+\end{tabular}
+
+\subsection*{I-b \small{$x^{-1}-2^{x}$ on $[0,1]$}} 
+
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition  $\epsilon$ and $\delta$ & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 0.641181945800781 & 17\\
+\hline
+$10^{-6}$ & 0.641185760498047 & 18\\
+\hline
+$10^{-7}$ & 0.641185760498047 & 18\\
+\hline
+$10^{-8}$ & 0.641185745596886 & 26\\
+\hline
+$10^{-9}$ & 0.641185744665563 & 30\\
+\hline
+$10^{-10}$ & 0.641185744490940 & 34\\
+\hline
+$10^{-11}$ & 0.641185744505492 & 36\\
+\hline
+$10^{-12}$ & 0.641185744504583 & 40\\
+\hline
+$10^{-13}$ & 0.641185744504980 & 44\\
+\hline
+$10^{-14}$ & 0.641185744504988 & 47\\
+\hline
+\end{tabular}
+
+\subsection*{I-c \small{$2^{-x}+e^{x}+2\cos x-6$ on $[1,3]$}}
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition  $\epsilon$ and $\delta$ & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 1.829383850097656 & 18\\
+\hline
+$10^{-6}$ & 1.829382896423340 & 21\\
+\hline
+$10^{-7}$ & 1.829383611679077 & 23\\
+\hline
+$10^{-8}$ & 1.829383604228497 & 28\\
+\hline
+$10^{-9}$ & 1.829383601434529 & 31\\
+\hline
+$10^{-10}$ & 1.829383601958398 & 35\\
+\hline
+$10^{-11}$ & 1.829383601936570 & 38\\
+\hline
+$10^{-12}$ & 1.829383601933841 & 41\\
+\hline
+$10^{-13}$ & 1.829383601933841 & 41\\
+\hline
+$10^{-14}$ & 1.829383601933849 & 48\\
+\hline
+\end{tabular}
+
+\subsection*{I-d \small{$\left( x^{3} + 4x^2+3x+5 \right)
+/\left( 2x^{3}-9x^2+18x-2 \right) $ on $[0,4]$}}
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition  $\epsilon$ and $\delta$  & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 0.117881774902344 & 19\\
+\hline
+$10^{-6}$ & 0.117877006530762 & 22\\
+\hline
+$10^{-7}$ & 0.117876589298248 & 26\\
+\hline
+$10^{-8}$ & 0.117876566946507 & 29\\
+\hline
+$10^{-9}$ & 0.117876566015184 & 32\\
+\hline
+$10^{-10}$ & 0.117876566771884 & 36\\
+\hline
+$10^{-11}$ & 0.117876566793711 & 39\\
+\hline
+$10^{-12}$ & 0.117876566794621 & 42\\
+\hline
+$10^{-13}$ & 0.117876566795360 & 46\\
+\hline
+$10^{-14}$ & 0.117876566795310 & 49\\
+\hline
+\end{tabular}
+
+\section*{II. \small{Newton's Method}}
+
+I used Newton's Method found the roots near 4.5 and 7.7 
+of the following function.
+It can be found that the Newton's Method converges so fast that
+the root can be found only in iterating times in unit digits.
+\subsection*{II-a \small{$x = \tan x$,  $x_0 = 4.5$}}
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition  $\epsilon$  & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 4.493409655013248 & 2\\
+\hline
+$10^{-6}$ & 4.493409457909247 & 3\\
+\hline
+$10^{-7}$ & 4.493409457909247 & 3\\
+\hline
+$10^{-8}$ & 4.493409457909247 & 3\\
+\hline
+$10^{-9}$ & 4.493409457909247 & 3\\
+\hline
+$10^{-10}$ & 4.493409457909247 & 3\\
+\hline
+$10^{-11}$ & 4.493409457909247 & 3\\
+\hline
+$10^{-12}$ & 4.493409457909064 & 4\\
+\hline
+$10^{-13}$ & 4.493409457909064 & 4\\
+\hline
+$10^{-14}$ & 4.493409457909064 & 4\\
+\hline
+\end{tabular}
+
+\subsection*{II-b \small{$x = \tan x $, $x_0 = 7.7$}}
+There is a problem that when $\epsilon = 10^{-14}$, the iteration does not stop untill the iteration times outof the postcondition. I think the problem happens because the finit digits of cpp program, the $x_n$ is so close to the root that after  $f
+\left( x_n \right)$ is rounded up in double 
+, $f(x_{n}) = f(x_{n+1})$ and $ f(x_n) > 10^{-14}$, that may be 
+why the iteration will not stop.
+
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition  $\epsilon$ and $\delta$ & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 7.725251836938464 & 4\\
+\hline
+$10^{-6}$ & 7.725251836938464 & 4\\
+\hline
+$10^{-7}$ & 7.725251836938464 & 4\\
+\hline
+$10^{-8}$ & 7.725251836938464 & 4\\
+\hline
+$10^{-9}$ & 7.725251836938464 & 4\\
+\hline
+$10^{-10}$ & 7.725251836938464 & 4\\
+\hline
+$10^{-11}$ & 7.725251836937707 & 5\\
+\hline
+$10^{-12}$ & 7.725251836937707 & 5\\
+\hline
+$10^{-13}$ & 7.725251836937707 & 5\\
+\hline
+$10^{-14}$ & 7.725251836937707 & 100\\
+\hline
+\end{tabular}
+
+\section*{III. \small{Secant Method}}
+
+I used Secant Method found the root of the following functions.
+It can be found that the convergent speed of Secant Method
+is also very fast. But it is slower than Newton's Method. 
+\subsection*{III-a \small{$\sin \left( \frac{x}{2} \right)-1 $
+with $x_0=0,x_1=\frac{\pi}{2}$}}
+
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition   $\epsilon$  and  $\delta$  & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 2.221441469079183 & 1\\
+\hline
+$10^{-6}$ & 2.579569691806805 & 2\\
+\hline
+$10^{-7}$ & 3.134268450825327 & 11\\
+\hline
+$10^{-8}$ & 3.138795060236532 & 13\\
+\hline
+$10^{-9}$ & 3.140932231503763 & 16\\
+\hline
+$10^{-10}$ & 3.141340394802018 & 18\\
+\hline
+$10^{-11}$ & 3.141533103369373 & 21\\
+\hline
+$10^{-12}$ & 3.141569907429061 & 23\\
+\hline
+$10^{-13}$ & 3.141583965313214 & 25\\
+\hline
+$10^{-14}$ & 3.141590602603975 & 28\\
+\hline
+\end{tabular}
+
+\subsection*{III-b \small{$e^{x}-\tan x$ with $x_0=0,x_1=1.4$}}
+
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition   $\epsilon$  and  $\delta$  & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & 1.159924363529063 & 1\\
+\hline
+$10^{-6}$ & 1.121423255162759 & 3\\
+\hline
+$10^{-7}$ & 1.306326943021557 & 13\\
+\hline
+$10^{-8}$ & 1.306326943021557 & 13\\
+\hline
+$10^{-9}$ & 1.306326943021557 & 13\\
+\hline
+$10^{-10}$ & 1.306326940423042 & 14\\
+\hline
+$10^{-11}$ & 1.306326940423042 & 14\\
+\hline
+$10^{-12}$ & 1.306326940423042 & 14\\
+\hline
+$10^{-13}$ & 1.306326940423042 & 14\\
+\hline
+$10^{-14}$ & 1.306326940423042 & 14\\
+\hline
+\end{tabular}
+
+\subsection*{III-c \small{$x^{3}-12x^2+3x+1$ with $x_0=0,x_1=-0.5$}}
+\begin{tabular}{|c|c|c|}
+\hline
+postcondition   $\epsilon$  and  $\delta$  & $\alpha$  & iterating times\\
+\hline
+$10^{-5}$ & -0.108108108108108 & 1\\
+\hline
+$10^{-6}$ & -0.182578753220966 & 3\\
+\hline
+$10^{-7}$ & -0.188685400608274 & 6\\
+\hline
+$10^{-8}$ & -0.188685400608274 & 6\\
+\hline
+$10^{-9}$ & -0.188685400608274 & 6\\
+\hline
+$10^{-10}$ & -0.188685403446523 & 7\\
+\hline
+$10^{-11}$ & -0.188685403446523 & 7\\
+\hline
+$10^{-12}$ & -0.188685403446523 & 7\\
+\hline
+$10^{-13}$ & -0.188685403446523 & 7\\
+\hline
+$10^{-14}$ & -0.188685403446523 & 7\\
+\hline
+\end{tabular}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

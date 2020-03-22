@@ -18,12 +18,12 @@ int NewtonMethod::set(double _e, int _t) {
 double NewtonMethod::solve(const ScalarFunction& _f
 						, const ScalarFunction& _fd
 						, double _x0) {
-	__num = 0;
+	__num = 0;						//Initialize __num
 	double x = _x0;
 	double u;
 	for(int i = 0; i != __T; i++) {
 		u = _f(x);
-		if(fabs(u) < __error) {
+		if(fabs(u) < __error) {    //Stop the iteration if the postcondition is reached.
 			break;
 		}
 		__num++;

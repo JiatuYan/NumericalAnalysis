@@ -18,7 +18,7 @@ double BinaryMethod::solve(const ScalarFunction& f, double a, double b) {
 		std::cerr << "The [a, b] is not an interval" << std::endl;
 		std::exit(-1);
 	}
-	__num = 0;
+	__num = 0;											//Initialize __num
 	double h = b - a;
 	double c, w;
 	double u = f(a);
@@ -27,8 +27,8 @@ double BinaryMethod::solve(const ScalarFunction& f, double a, double b) {
 		c = a + h;
 		w = f(c);
 		__num++;
-		if(fabs(h) < __error || fabs(w) < __ferror) {
-			break;
+		if(fabs(h) < __error || fabs(w) < __ferror) {  // Stop the iteration if the postcondition is reached.
+			break; 
 		}
 		else if(sgn(w) == sgn(u)) {
 			a = c;

@@ -7,7 +7,7 @@ double SecantMethod::solve(ScalarFunction& _f, double _x0, double _x1){
 	double v = _f(x_n_1);
 	double t;
 	double s;
-	__num = 0;
+	__num = 0;							//Initialize __num
 	for(int i = 2; i != __T; i++) {
 		if(fabs(u) > fabs(v)) {
 			t = u;
@@ -24,7 +24,7 @@ double SecantMethod::solve(ScalarFunction& _f, double _x0, double _x1){
 		u = _f(x_n);
 		__num++;
 		if(fabs(x_n - x_n_1) < __error || fabs(u) < __ferror) {
-			break;
+			break;						//Stop the iteration if the postcondition is reached.
 		}
 		if(fabs(x_n) > 100) {
 			break;

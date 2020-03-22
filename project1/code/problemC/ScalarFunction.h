@@ -8,6 +8,13 @@
 
 class ScalarFunction {
 public:
+	/**
+	 * @brief operator()  Redefine the operator() for the function. Here is a virtual function.
+	 *
+	 * @param x	The variable of f.
+	 *
+	 * @return f(x)
+	 */
 	virtual double operator()(double x) const = 0;
 };
 

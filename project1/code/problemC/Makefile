@@ -14,4 +14,4 @@ test3 : test3.o function3.o SecantMethod.o
 	g++ -c $< 
 
 clean :
-	rm *.o *.exe html latex -fr test1 test2 test3 test4
+	rm *.o *.exe html latex -fr test1 test2 test3 output1.txt output2.txt output3.txt

@@ -31,7 +31,7 @@
 
 \begin{document}
 
-pagestyle{fancy}
+\pagestyle{fancy}
 \fancyhead{}
 \lhead{NAME Jiatu Yan}
 \chead{Numerical Analysis homework \#1}
@@ -94,7 +94,7 @@ $x_{n}$ &-1&$-0.8125$ &$-0.7708041958$&$-0.7688323843$&$-0.7688280859$\\
 , find C and s such that $e_{n+1}=Ce_{n}^{s}$.}}
 
 Do not lose the generality, we can assume that the root $\alpha<x_0
-, f\left(  \alpha\right)=0, f'\left( x\right)>0 \forall x\in\left( \alpha,x_0]$ .
+, f\left(  \alpha\right)=0, f'\left( x\right)>0 \forall x\in \left( \alpha,x_0\right) $ .
 Thus, we have $\alpha<x_{n+1}< x_{n}\le x_0, \forall n\in\mathbb{N}$.	
 
 By Taylor's theorem we have
@@ -147,7 +147,7 @@ When n=1, it is obvious that $\frac{1}{p+\frac{1}{p}}=x_2<x_1=\frac{1}{p}$.
 Suppose when $n=k\left(  k\ge 1\right) $, $x_{n+1}<x_{n}$
 . Then, $x_{n+2}=\frac{1}{p+x_{n+1}}<\frac{1}{p+x_{n}}=x_{n+1}$.
 So we have $\forall n\in \mathbb{N}^{+}, x_{n+1}<x_{n}$.
-Because $\\forall n\in\mathbb{N}^{+}, x_{n}>0$, we have $\{x_{n}\}$ is convergent.
+Because $\forall n\in\mathbb{N}^{+}, x_{n}>0$, we have $\{x_{n}\}$ is convergent.
 
 To get the value of x, we take a function $f\left( x\right)=\frac{1}{p+x} $
 , $x_{n}=f\left( x_{n+1} \right) $, when $n\to \infty, x_{n}\to x$.
@@ -160,7 +160,7 @@ Since we have proved that $\{x_{n}\}$ is convergent, by the randomization of $\e
 
 We assume that $c=min\{-a_0, b_0\}$.
 
-If r\neq 0, indorer to determine that relative error no greater than $\epsilon$
+If $r\neq 0$, indorer to determine that relative error no greater than $\epsilon$
 , we have $ \frac{d_{n}}{r}\le \frac{b_{0}-a_{0}}{r2^{n+1}}
 \le \frac{b_0-a_0}{c2^{n+1}}<\epsilon$.
 Thus, the same as the inequality we have in II, we have
@@ -180,12 +180,12 @@ Since $f^{\left( k \right)\neq 0 }$, by taking $x_0$ sufficiently close to $\alp
 By Taylor's theorem we have, 
 \[
 	f\left( x_{n}\right)=\sum_{n=0}^{\infty} 
-	\frac^{n}{f\left(  \alpha\right)\left( x_{n}-\alpha\right)^{n}  }{n!} 
+	\frac{f^{\left( n\right) }\left(  \alpha\right)\left( x_{n}-\alpha\right)^{n}  }{n!} 
 .\] 
 Because $f^{i}\left( \alpha \right) =0\left(  i<k\right) $, we have
 \[
 	f\left( x_{n}\right)=\sum_{n=k}^{\infty} 
-	\frac^{n}{f\left(  \alpha\right)\left( x_{n}-\alpha\right)^{n}  }{n!}
+	\frac{f^{\left( n \right) }\left(  \alpha\right)\left( x_{n}-\alpha\right)^{n}  }{n!}
 	=O\left( (x_{n}-\alpha)^{k} \right) 
 .\] 
 So if 
@@ -194,7 +194,8 @@ So if
 	, \mid f\left( x_{n} \right) \mid <  \mid a\left( x-\alpha \right)^k   \mid        
 .
 \]
-We can detect a multiple zero.
+Which means the ${f\left( x_n \right) }$ converge to  $f
+\left( \alpha \right) $ in order k, so we can detect a multiple zero.
 
 \subsection*{VIII-b. \small{Prove that if r is a zero of multiplicity k
 , quadratic convergence in Newton's iteration will be restored by 
@@ -218,7 +219,6 @@ and
 	+\frac{1}{k!}
 	\left( x_{n}-\alpha \right)^{k}f^{\left( k \right) }\left( \eta\right)  
 	\left( \eta\in\left( \alpha, x_{n} \right)  \right) 
-
 .\] 
 So by the iteration $x_{n+1}=x_{n}-k\frac{f\left( x_{n} \right) }{f'\left( x_{n} \right) }$, we have
 \[
@@ -238,15 +238,15 @@ e_{n+1}=\frac{\frac{1}{k!}{e_{n}}^{k}f^{\left(  k\right) }\left( \alpha \right)
 {\frac{1}{k!}f^{\left( k \right) }\left( \alpha\right) 
 +\frac{1}{k!k}{e_{n}}f^{\left( k+1 \right)}\left( \eta \right) }
 .\] 
-Because $\lim_{n\t\infty}e_{n}=0$
+Because $\lim_{n\to\infty}e_{n}=0$
 , $ \mid f^{\left( k+1 \right) }\left(  \xi\right)  \mid 
 < \mid f^{\left(  k+1\right) }\left( \alpha \right)  \mid $
 , $ \mid f^{\left( k+1 \right) }\left(  \xi\right)  \mid 
 < \mid f^{\left(  k+1\right) }\left( \alpha \right)  \mid $, we have
 \[
  \mid \frac{e_{n+1}}{e_{n}^2} \mid 
- \le  \mid \frac{\frac{2}{k!k}f^{\left( k+1 \right) }\left(  \alpha\right) }
-{\frac{1}{k!}f^{\left( k\right) }\left( \alpha \right) } \mid 
+ \le  \mid \frac{2f^{\left( k+1 \right) }\left(  \alpha\right) }
+{kf^{\left( k\right) }\left( \alpha \right) } \mid = C 
 .\] 
 So we have proved that the modified iteration is quadratic convergence.
 
