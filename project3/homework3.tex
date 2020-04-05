@@ -1,0 +1,97 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{NAME Jiatu Yan}
+\chead{Numerical Analysis homework \#3}
+\rhead{Date 2020.3.29}
+
+
+\section*{I. \small{For $n\in\mathbb{N^{+}}$, determin $\min\max \limits_{x\in[a,b]} \mid a_0x^{n}+a_1x^{n-1}+\ldots+a_n \mid $.}}
+
+Since $\forall \{a_n\}$, 
+$$\max \limits_{x\in[-1,1]} \mid x^{n}+a_1x^{n-1}+\ldots+a_n \mid\ge \frac{1}{2^{n-1}}.$$
+And the equality can be reached if 
+$x^{n}+a_1x^{n-1}+\ldots+a_n=\frac{1}{2^{n-1}}T_n\left( x \right) .$
+Thus we can have a conversion of the fomular $a_0x^{n}+a_1x^{n-1}+\ldots+a_n$ that 
+\[
+	\max\limits_{x\in[a,b]} \mid a_0x^{n}+a_1x^{n-1}+\ldots+a_n \mid 
+		= \max\limits_{x\in[-1,1]} \mid a_0\left( \frac{b-a}{2}x+\frac{b+a}{2} \right)^{n}+\ldots+a_n \mid 
+		=\max\limits_{x\in[-1,1]} \mid a_0'x^{n}+a'_1x^{n-1}+\ldots+a'_n \mid 
+.\] 
+The $\{a'_n\}$ can be randomly taken because $\{a_n\}$ is random.
+Because $a'_0$ is independent with $\{a'_n\}$, we suppose $a''_i=\frac{a'_i}{a'_0}$, we have
+\begin{equation*}
+	\begin{split}
+	 \min\max\limits_{x\in[a,b]} \mid a_0x^{n}+a_1x^{n-1}+\ldots+a_n \mid 
+	 &=\min|a_0|\max\limits_{x\in[-1,1]} \mid x^{n}+a''_1x^{n-1}+\ldots+a''_n \mid 
+       \\&\ge \min|a_0|\frac{1}{2^{n-1}} .
+\end{split}
+\end{equation*}
+Since the equality can be reached and $a_0$ is randomly taken from $\mathbb{R}\backslash\{0\}$, we have\
+ \[
+\min \mid a_0 \mid \frac{1}{2^{n-1}}=0
+.\] 
+Thus,
+\[
+\min\max \limits_{x\in[a,b]} \mid a_0x^{n}+a_1x^{n-1}+\ldots+a_n \mid =0
+.\] 
+
+\section*{II. \small{Prove $\forall p\in\mathbb{P}_n^{\alpha}, 
+\lVert \hat{p}_n\left( x \right) \rVert_\infty\le \lVert p\rVert_\infty$.}}
+
+Suppose that
+$$\exists p\in\widetilde{\mathbb{P}}_n\quad s.t.\quad \max\limits_{x\in[-1.1]} \mid p\left( x \right) \mid <\lVert \hat{p}_n\left( x \right) \rVert.  $$
+$T_n\left( x \right) $ assumes its extreme $n+1$ times at the  points $x'_k=\cos \frac{k}{n}\pi$ $k=0,1,\ldots,n$.
+Consider the polynomial $Q\left( x \right)=\frac{T_n\left( x \right) }{T_n\left( \alpha \right) }-p\left( x \right) $. We have
+\[
+	Q\left( x'_{k} \right)=\frac{\left( -1 \right)^{k} }{T_n\left( \alpha \right) }-p\left( x'_k \right)  \qquad  k=0,1\ldots,n  
+.\]
+Since 
+$\mid p\left( x'_k \right) \mid <\lVert \hat{p}_n\left( x \right) \rVert =\frac{1}{T_n\left( \alpha \right) } $.
+$Q\left( x \right) $ has alternating signs at these $n+1$ points, which means  $Q\left( x \right) $ must have $n$ zeros in $[-1,1]$.
+But we know  $Q\left( \alpha \right)=0, \alpha>1$ and $Q\left( x \right) $ is a polynomial with degree $n$. 
+So  $Q\left( x \right) $ has at most $n-1$ zeros within  $[-1,1]$.
+Therefore,  $Q\left( x \right)\equiv 0$ and $p\left( x \right)=\frac{T_n\left( x \right) }{T_n\left( \alpha \right) } $
+, which means $\lVert \hat{p}_n\left( x \right) \rVert_\infty=\lVert p\rVert_\infty$. 
+It is a contradition to our assumption.
+Therefore, we have
+\[
+\forall p\in\mathbb{P}_n^{\alpha}, \lVert \hat{p}_n\left( x \right) \rVert_\infty\le \lVert p\rVert_\infty
+.\] 
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
