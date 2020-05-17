@@ -1,0 +1,122 @@
+\documentclass[twoside,a4paper]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{NAME Jiatu Yan}
+\chead{Numerical Analysis homework \#6}
+\rhead{Date 2020.5.16}
+
+
+\section*{I. \small{Convert the decimal integer  477 to a normalized FPN with $\beta=2$.}}
+$477=2^{8}+2^{7}+2^{5}+2^{4}+2^{3}+2^2+2+1=\left( 110111111 \right)_{2}=\left( 1.10111111 \right)_{2}\times2^{8}  $.
+
+\section*{II. \small{Convert the decimal fraction 3/5 to a normalized FPN with $\beta=2$.}}
+\begin{equation*}
+	\begin{split}
+		\frac{3}{5}\times2&=\frac{6}{5}=1+\frac{1}{5}\\
+		\frac{1}{5}\times2&=\frac{2}{5}\\
+		\frac{2}{5}\times2&=\frac{4}{5}\\
+		\frac{4}{5}\times2&=\frac{8}{5}=1+\frac{3}{5}\\
+	\end{split}	
+\end{equation*}
+
+So we have $\frac{3}{5}\times 2^{4}=(1001)_{2}+\frac{3}{5}$, thus $\frac{3}{5}=\left( 0.10011001\ldots \right)_{2}
+=\left( 1.00110011\ldots \right)\times 2^{-1}  $.
+
+\section*{III. \small{Prove $x_{R}-x=\beta\left( x-x_{l} \right) $.}}
+Since $x=1\times \beta^{e}$, we have 
+\begin{equation*}
+	\begin{split}
+		x_R&=\left( 1+\frac{1}{\beta^{p-1}} \right)\times \beta^{e}\\ 
+		x_L&=\left( \beta-\frac{1}{\beta^{p-1}} \right)\times \beta^{e-1}
+		=[\left( \beta-1 \right)+\frac{\beta-1}{\beta}+\ldots+\frac{\beta-1}{\beta^{p-1}}]\times \beta^{e-1}  .
+	\end{split}
+\end{equation*}
+
+So we have the equation
+\[
+	\left( x_R-x \right)=\frac{1}{\beta^{p-1}}\times \beta^{e}=\frac{1}{\beta^{p-1}}\times \beta^{e-1}\times \beta  
+	=\beta\left( x-x_L \right) 
+.\] 
+
+\section*{IV. \small{Find out the two normalized FPNs adjacent to $x=3/5$ under the IEEE 754 single-precision protocol.What is $fl\left( x \right) and the relative roundoff error?$}}
+By problem II, we have $\frac{3}{5}=\left( 1.00110011\ldots \right)_{2}\times x^{-1}$, under the IEEE 754 single-precision protocol
+,$p=24$, so we have
+
+\begin{equation*}
+	\begin{split}
+		x_L&=2^{-1}\times \left( 1.00110011001100110011001 \right)_2\\
+		x_R&=2^{-1}\times \left( 1.00110011001100110011010 \right)_2. 
+	\end{split}	
+\end{equation*}
+
+Then calculate $3/5-x_L$ and $x_R-3/5$, we have
+ \begin{equation*}
+	 \begin{split}
+		 \frac{3}{5}-x_L&=2^{25}\times \left( 1.00110011\ldots \right)_2\\
+		 x_R-\frac{3}{5}&>x_R-2^{-1}\times \left( 1.0011001100110011001100111 \right)_2
+		 =2^{-25}\times \left( 10.1 \right)_2>\frac{3}{5}-x_L. 	
+	 \end{split}
+\end{equation*}
+
+ So $fl\left( \frac{3}{5} \right)=x_L=2^{-1}\times \left( 1.00110011001100110011001 \right)_2  $ 
+, round error $e=2^{-25}\times \left( 1.00110011\ldots \right)_2=2^{-25}\times 3/5$. 
+
+\section*{V. \small{What would the unit roundoff be if the IEEE 754 single-precision protocol dropped excess bits?}}
+\[
+	\epsilon_u=\max_{x\in\mathcal{R}\left( \mathcal{F} \right)}\frac{ \mid  fl\left( x \right)-x \mid }{\beta^{e_x}}
+	=\frac{\left( 1.11\ldots \right)_2\times 2^{-24}\times \beta^{e_x} }{\beta^{e_x}}=2^{-23}
+.\] 
+
+\section*{VI. \small{How many bits of precision are lost in the subtraction $1-\cos x$ when $x=\frac{1}{4}$?}}
+Because $2^{-6}\le 1-\cos\left( \frac{1}{4} \right) \le 2^{-5}$, subtraction $1-\cos\left( \frac{1}{4} \right) $ will lost at least 5, at most 6 bits of precision.
+
+\section*{VII. \small{Suggest at least two ways to compute $1-\cos x$ to avoid catastrophic cancellation caused by subtraction.}}
+To avoid catastrophic cancellation, we can use multiplication to calculate $1-\cos\left(x \right) $ that is 
+\[
+	1-\cos x=1-\cos 2\frac{x}{2}=2\sin ^{2}\frac{x}{2}
+.\] 
+Since multiplication is accurate, we can avoid catastrophic cancellation.
+
+The second method is to avoid the result of addition close to 0.
+By using Taylor series we can avoid catastrophic cancellation, that is 
+\[
+	1-\cos x=1-\left( 1-\frac{1}{2!}x^{2}+\frac{1}{4!}x^{4}-\ldots \right)
+	=\frac{1}{2!}x^{2}-\frac{1}{4!}x^{4}+\frac{1}{6!}x^{6}-\ldots 
+.\]
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
