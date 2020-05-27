@@ -46,6 +46,10 @@ public:
 
 	int setW();
 
+	int BackTrackPLG(Gather _k, std::vector<int> _q);
+
+	Permutation<D, _n> root();
+
 	int BackTrack(Gather _k, std::vector<int> _q, Permutation<D, _n> _A);
 	
 	bool Accept(Gather _k, std::vector<int> _q, Permutation<D, _n> _A);
@@ -55,6 +59,14 @@ public:
 	Gather Permute(Permutation<D, _n> _A, Gather _W);
 
 	bool StopAfterAccept();
+
+	bool Reject(Gather _k, std::vector<int> _q, Permutation<D, _n> _A);
+	
+	int vs(int _t);
+	
+	Permutation<D, _n> first(Gather _k, std::vector<int> _q, Permutation<D, _n> _A); 
+
+	Permutation<D, _n> next(Gather _k, std::vector<int> _q, Permutation<D, _n> _A, Permutation<D, _n> _B);
 //private:
 	std::vector<Permutation<D, _n> > __U;
 	Gather __P;
