@@ -1,6 +1,20 @@
 #include "PLG.h"
 
 template <int D, int _n>
+Permutation<D, _n>& Permutation<D, _n>::operator=(const Permutation& A) {
+	if(this == &A) {
+		return *this;
+	}
+	for(int i = 0; i != D; i++) {
+		for(int j = 0; j != _n+1; j++) {
+			this->Pm[i][j] = A.Pm[i][j];
+		}
+	}
+	this->t = A.t;
+	return *this;
+}
+
+template <int D, int _n>
 PLG<D, _n>::PLG() {
 	std::vector<int> A(D);
 	setP(A, 0, _n);
@@ -110,6 +124,7 @@ int PLG<D, _n>::BackTrack(Gather _k, std::vector<int> _q, Permutation<D, _n> _A)
 	while(S.t != - 1) {
 		BackTrack(_k, _q, S);
 		S = next(_k, _q, _A, S);
+		std::cout << S.t << std::endl;
 	}
 };
 
@@ -119,6 +134,7 @@ bool PLG<D, _n>::Accept(Gather _k, std::vector<int> _q, Permutation<D, _n> _A) {
 		return false;
 	}	
 	else if(Deter(_k, _q, _A)) {
+		std::cout << "Accept" << std::endl;
 		return true;
 	}
 	else {
@@ -131,20 +147,20 @@ bool PLG<D, _n>::Deter(Gather _k, std::vector<int> _q, Permutation<D, _n> _A) {
 	Gather PW, PP;
 	PW = Permute(_A, __W[D - 1][_n]);
 	PP = Permute(_A, __P);
-	int hw[int(pow(_n + 1, D+1) + 1)];
-	int hp[int(pow(_n + 1, D+1) + 1)];
+	int hw[int(pow(_n + 1, D+1) + 1)] = {0};
+	int hp[int(pow(_n + 1, D+1) + 1)] = {0};
 	int hash;
 	int pol = 0;
 	std::vector<std::vector<int> >::iterator itr;
 	std::vector<int>::iterator it;
-	for(itr = PW.begin(); itr != PW.G.end(); itr++) {
+	for(itr = _k.begin(); itr != _k.G.end(); itr++) {
 		hash = 0;
 		for(it = (*itr).begin(); it != (*itr).end(); it++) {
 			hash = hash*(_n + 1) + (*it);   
 		}
 		hw[hash]++;
 	}
-	for(itr = __W[D - 1][_n].begin(); itr != __W[D - 1][_n].G.end(); itr++) {
+	for(itr = PW.begin(); itr != PW.G.end(); itr++) {
 		hash = 0;
 		for(it = (*itr).begin(); it != (*itr).end(); it++) {
 			hash = hash*(_n + 1) + (*it); 
@@ -182,6 +198,9 @@ template<int D, int _n>
 Gather PLG<D, _n>::Permute(Permutation<D, _n> _A, Gather _W) {
 	std::vector<int> A;
 	Gather B;
+	if(_W.G.size() == 0) {
+		return B;
+	}
 	int card,t;
 	std::vector<std::vector<int> >::iterator itr;
 	std::vector<int>::iterator it;
@@ -215,16 +234,19 @@ int PLG<D, _n>::vs(int _t) {
 
 template <int D, int _n>
 bool PLG<D, _n>::Reject(Gather _k, std::vector<int> _q, Permutation<D, _n> _A) {
-	if(_A.t = D*(_n+1)) {
+	if(_A.t == D*(_n+1)) {
 		return !Accept(_k, _q, _A);
 	}
+	else if(_A.t == 0) {
+		return 0;
+	} 
 	else {
-		int l = vs(_A.t + 1);
-		int m = (_A.t) / D;
+		int l = vs(_A.t);
+		int m = (_A.t - l) / D;
 		Gather Ap = Permute(_A, __W[l - 1][m]);
 		std::vector<std::vector<int> >::iterator itr;
 		std::vector<int>::iterator it;
-		int k[int(pow(_n + 1, D+1) + 1)];
+		int k[int(pow(_n + 1, D+1) + 1)] = {0};
 		int hash;
 		for(itr = _k.begin(); itr != _k.G.end(); itr++) {
 			hash = 0;
@@ -239,55 +261,76 @@ bool PLG<D, _n>::Reject(Gather _k, std::vector<int> _q, Permutation<D, _n> _A) {
 				hash = hash*(_n + 1) + (*it);
 			}
 			if(k[hash] == 0) {
-				return Accept(_k, _q, _A);
+				return 1;
 			}
 		}
 	}
+	return 0;
 };
 
 template <int D, int _n>
 Permutation<D, _n> PLG<D, _n>::first(Gather _k, std::vector<int> _q,
 									Permutation<D, _n> _A) {
+	std::cout << std::endl << "first" << std::endl;
 	int l = vs(_A.t + 1);
+	std::cout << l;
 	int m = (_A.t) / D;
+	std::cout << m;
 	Permutation<D, _n> B;
 	B = _A;
 	B.t++;
-	int Z[_n + 1];
-	for(int i = 0; i != m - 1; i++) {
+	int Z[_n + 1]={0};
+	for(int i = 0; i != m; i++) {
 		if(B.Pm[l - 1][i] != -1) {
 			Z[B.Pm[l - 1][i]] ++;
 		}
 	}
 	for (int i = _n; i != - 1; i--) {
 		if(Z[i] == 0) {
-			B.Pm[l][m] = i;
+			B.Pm[l - 1][m] = i;
 			break;
 		}
 	}
+	for(int i = 0; i != D; i++)  {
+		for(int j = 0;j != _n+1; j++) {
+			std::cout << B.Pm[i][j] << ' ';
+		}
+		std::cout << std::endl;
+	}
+	std::cout << B.t << std::endl;
 	return B;
 };  
 
 template <int D, int _n>
 Permutation<D, _n> PLG<D, _n>::next(Gather _k, std::vector<int> _q,
 									Permutation<D, _n> _A, Permutation<D, _n> _B) {
+	std::cout << std::endl << "next" << std::endl;
+	for(int i = 0; i != D; i++)  {
+		for(int j = 0;j != _n+1; j++) {
+			std::cout << _B.Pm[i][j] << ' ';
+		}
+		std::cout << std::endl;
+	}
+	std::cout << _B.t << std::endl;
 	int l = vs(_A.t + 1);
 	int m = (_A.t) / D;
+	std::cout << l << ' '<< m << std::endl;
 	Permutation<D, _n> C = _B;
-	int Z[_n + 1];
+	int Z[_n + 1] = {0};
 	int i;
-	for(i = 0; i != m - 1; i++) {
+	for(i = 0; i != m; i++) {
 		if(_B.Pm[l - 1][i] != -1) {
 			Z[_B.Pm[l - 1][i]] ++;
 		}
 	}
-	for(i = 0; i != _n; i++) {
+	for(i = 0; i != _n + 1; i++) {
 		if(Z[i] == 0) {
-			if(_B.Pm[l - 1][m] = i) {
+			if(_B.Pm[l - 1][m] == i) {
 				C.t = -1;
+				std::cout << C.t;
 				return C;
 			}
-		break;
+			break;
 		}
 	}
 	for(i = _B.Pm[l - 1][m] - 1; i != -1; i--) {
@@ -296,5 +339,12 @@ Permutation<D, _n> PLG<D, _n>::next(Gather _k, std::vector<int> _q,
 			break;
 		}
 	}
+	for(int i = 0; i != D; i++)  {
+		for(int j = 0;j != _n+1; j++) {
+			std::cout << C.Pm[i][j] << ' ';
+		}
+		std::cout << std::endl;
+	}
+	std::cout << C.t << std::endl;
 	return C;
 };

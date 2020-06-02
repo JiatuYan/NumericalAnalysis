@@ -10,6 +10,13 @@ class Gather {
 public:	
 	std::vector<std::vector<int> > G;
 	
+	Gather& operator=(const Gather& _G) {
+		if(this == &_G) {
+			return *this;
+		}
+		this->G = _G.G;
+		return *this;
+	};
 	std::vector<std::vector<int> >::iterator begin() {
 		return G.begin();
 	}
@@ -30,9 +37,15 @@ template <int D, int _n>
 class Permutation {
 public:
 	Permutation<D, _n>() {
-		int (*Pm)[_n+1] = new int[D][_n+1];
 		t = 0;
+		for(int i = 0; i != D; i++) {
+			for(int j = 0; j != _n+1; j++) {
+				Pm[i][j] = -1;
+			}
+		}
 	};
+	
+	Permutation<D, _n>& operator=(const Permutation<D, _n>& A);
 	int Pm[D][_n+1];
 	int t;
 };
